@@ -1,0 +1,66 @@
+<div class="register">
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <form [formGroup]="registerData" (ngSubmit)="registerValue()">
+                    <div class="Heading pt-5">
+                        <h2 class="pt-5 fw-bold fs-1">Register Now</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis magnam necessitatibus eius est mollitia corporis tempore.</p>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col">
+                            <!-- [ngClass]="something === 'first' ? 'blue red-border' : 'blue'" -->
+                          <input type="text" formControlName="userName" [ngClass]="registerData.get('userName')?.errors == null? 'is-valid' : 'is-invalid'" class="form-control rounded-0" placeholder="First name">
+                          <div *ngIf="registerData.get('userName')?.errors && registerData.get('userName')?.touched" class="text-danger validationMessage pt-2">
+                            <p *ngIf="registerData.get('userName')?.errors?.['required']" class="m-0">Please enter your Name.</p>
+                            <p *ngIf="registerData.get('userName')?.errors?.['pattern']" class="m-0">Please start with capital letter.</p>
+                            <p *ngIf="registerData.get('userName')?.errors?.['minlength']" class="m-0">Please at least insert {{registerData.get('userName')?.errors?.['minlength'].requiredLength}} characters.</p>
+                            <p *ngIf="registerData.get('userName')?.errors?.['maxlength']" class="m-0">Max characters to enter {{registerData.get('userName')?.errors?.['maxlength'].requiredLength}} character.</p>
+                         </div>
+                        </div>
+                        <div class="col">
+                          <input type="email" formControlName="email" class="form-control rounded-0" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="row g-3 mt-3">
+                        <div class="col">
+                          <input type="text" formControlName="phoneNumber" class="form-control rounded-0" placeholder="Phone Number">
+                        </div>
+                        <div class="col">
+                          <input type="password" formControlName="password" class="form-control rounded-0" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div>
+                          <input type="text" formControlName="address" class="form-control rounded-0" placeholder="Address">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <button class="btn btn-warning py-2 px-4 mt-4 rounded-0 fw-bold shadow" routerLink="/restaurants">BACK</button>
+                        </div>
+                        <div>
+                            <button [disabled] = 'registerData.invalid && registerData.touched' class="btn btn-warning py-2 px-4 mt-4 rounded-0 fw-bold shadow">CONFIRM</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 pt-5">
+                <div class="pt-5">
+                    <div *ngFor="let item of baskets" class="mt-4 shadow">
+                       <div class="d-flex justify-content-between align-items-center OrderItems border border-1 border-warning p-3">
+                           <div class="image">
+                               <img src={{item.pictureUrl}} width="90px">
+                           </div>
+                           <div>
+                               <h3 class="m-0 text-warning">{{item.mealName}}</h3>
+                               <p class="bg-warning text-center py-1 px-2 m-0">{{item.price|currency}}</p>
+                           </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

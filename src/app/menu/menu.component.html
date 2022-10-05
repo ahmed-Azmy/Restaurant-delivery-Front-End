@@ -1,0 +1,25 @@
+<div class="Menu">
+    <div class="container">
+         <h2 class="Heading pt-5 text-center fw-bold fs-1 text-warning">Choose Meals From the Menu</h2>
+            <div class="row row-cols-1 row-cols-sm-2 g-4">
+                <div class="col" *ngFor="let item of menuItems">
+                    <div class="card mb-3 rounded-0">
+                        <div class="row g-0 ">
+                            <div class="col-md-4">
+                                <img [src]="item.pictureUrl" class="img-fluid rounded-0 h-100 w-100" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                  <input type="checkbox" [value]="item.id" (change)="onChange($event , item.name, item.price,item.pictureUrl)"/>
+                                  <h5 class="card-title">{{item.name}}</h5>
+                                  <p class="card-text">{{item.details}}</p>
+                                  <p class="card-text text-end"><small class="text-warning fw-bold fs-5">{{item.price}}$</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+        </div>
+        <button [disabled]="!buttonStatus ? 'disabled' : null" class="btn btn-warning py-1 px-4 rounded-0" routerLink="/register">Next</button>
+      </div>
+</div>

@@ -1,0 +1,8 @@
+.Menu .Heading{
+    font-family: 'Great Vibes', cursive;
+}
+@media screen and (max-width:768px) {
+    .Menu img{
+        height: 150px !important;
+    }
+}

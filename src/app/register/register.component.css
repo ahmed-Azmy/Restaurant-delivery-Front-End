@@ -1,0 +1,11 @@
+.register .Heading h2{
+    font-family: 'Great Vibes', cursive;
+}
+.register .OrderItems h3{
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    font-weight: 400;
+}
+.register .validationMessage p{
+    font-size: 14px;
+}

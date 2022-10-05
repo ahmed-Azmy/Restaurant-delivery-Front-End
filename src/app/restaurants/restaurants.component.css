@@ -1,0 +1,23 @@
+.Restaurant .Loading{
+    background-image: url(../../assets/images/RestaurantBackground.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+.Restaurant .Loading .Heading h1{
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 1;
+}
+.Restaurant .Loading .Heading .HeadingItalic{
+    font-family: 'Great Vibes', cursive;
+}
+.Restaurant .Loading .Search{
+    background-color: #FECD57;
+}
+.Restaurant .Loading .Counters .Image {
+    width: 65px;
+    height: 65px;
+}
+.Restaurant .Loading .Counters .Image img{
+ width: 37px;
+}
