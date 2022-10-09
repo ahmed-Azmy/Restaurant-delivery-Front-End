@@ -1,0 +1,97 @@
+<div class="order mb-5">
+    <div class="container">
+        <!--=============user info=============-->
+        <div class="data pt-5">
+            <h3>YOUR DATA</h3>
+            <span class="border-bottom border-2 border-warning d-block" style="width: 50px;"></span>
+            <div class="row gy-3 pt-4">
+                <div class="col-6 col-md-3">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-user pe-3 pt-1 text-warning"></i>
+                        <div>
+                            <h5 class="m-0">Name</h5>
+                            <p class="m-0 pt-2 text-secondary">{{currentUser?.userName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-phone pe-3 pt-1 text-warning"></i>
+                        <div>
+                            <h5 class="m-0">Phone</h5>
+                            <p class="m-0 pt-2 text-secondary">{{currentUser?.phoneNumber}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex">
+                        <i class="fa-regular fa-envelope pe-3 pt-1 text-warning"></i>
+                        <div>
+                            <h5 class="m-0">E-mail</h5>
+                            <p class="m-0 pt-2 text-secondary">{{currentUser?.email}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex">
+                        <i class="fa-solid fa-location-dot pe-3 pt-1 text-warning"></i>
+                        <div>
+                            <h5 class="m-0">Address</h5>
+                            <p class="m-0 pt-2 text-secondary">{{currentUser?.address}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--=============order details=============-->
+        <div class="details-Table mt-5 pt-3">
+            <table class="table table-bordered align-middle text-center">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of baskets">
+                    <th scope="row"><img src={{item.pictureUrl}} width="85px" height="85px" class="rounded-circle" alt=""></th>
+                    <td class="fw-bold">{{item.mealName}}</td>
+                    <td>{{item.price|currency}}</td>
+                    <td>
+                        <button class="btn btn-light rounded-0 border py-2 px-3" (click)="increaseQuantity(item.id ,item.mealName, item.price, item.quantity, item.pictureUrl)"><i class="fa-solid fa-plus"></i></button>
+                        <span class="border py-2 px-3">{{item.quantity}}</span> 
+                        <button class="btn btn-light rounded-0 border py-2 px-3" (click)="decreaseQuantity(item.id ,item.mealName, item.price, item.quantity, item.pictureUrl)"><i class="fa-solid fa-minus"></i></button>
+                    </td>
+                    <td>{{item.price * item.quantity | currency}}</td>
+                    <td><button class="btn" (click)="removeBasket(item.id)"><i class="fa-solid fa-xmark text-warning fs-5"></i></button></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--=============Total price=============-->
+        <div class="total-price p-4 mt-5 border">
+            <h5>Total</h5>
+            <div class="d-flex justify-content-between pt-2 border-bottom">
+                <p class="m-0">SubTotal</p>
+                <P class="m-0">{{totalPrice|currency}}</P>
+            </div>
+            <div class="d-flex justify-content-between pt-2 border-bottom">
+                <p class="m-0">Total</p>
+                <P class="m-0">{{totalPrice|currency}}</P>
+            </div>
+            <div class="d-flex justify-content-between mx-1 mt-4">
+                <button class="btn btn-warning rounded-0 py-2 px-3 fw-bold shadow" (click)="backClicked()">BACK</button>
+                <button class="btn btn-warning rounded-0 py-2 px-3 fw-bold text-white shadow" (click)="makeOrder()">CHECKOUT</button>
+            </div>
+        </div>
+        <!--===============Alert===============-->
+        <div *ngIf="alertStatus" class="alert alert-success text-center py-5 position-fixed start-0 bottom-0 end-0 m-0" role="alert">
+            <p class="fw-bold mb-2 pt-5">Thank you for visiting our website</p>
+            <p class="m-0 fs-5 pb-5">Order will arrive as soon as possible</p>
+        </div>
+    </div>
+</div>

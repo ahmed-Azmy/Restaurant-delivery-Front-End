@@ -1,0 +1,11 @@
+.login .Heading h2{
+    font-family: 'Great Vibes', cursive;
+}
+.login .OrderItems h3{
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    font-weight: 400;
+}
+.login .validationMessage p{
+    font-size: 14px;
+}

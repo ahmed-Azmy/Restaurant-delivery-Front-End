@@ -19,5 +19,9 @@
     height: 65px;
 }
 .Restaurant .Loading .Counters .Image img{
- width: 37px;
+     width: 37px;
+}
+.Restaurant .layer{
+    position: relative;
+    top: -35px;
 }

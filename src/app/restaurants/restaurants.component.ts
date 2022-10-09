@@ -8,64 +8,66 @@ RestaurantdeliveryapisService
 })
 export class RestaurantsComponent implements OnInit {
 
-  constructor(private _RestaurantdeliveryapisService:RestaurantdeliveryapisService) { }
-
+  /*=========Main Variables=========*/
   options:any; 
   Restaurants:any;
   RestaurantsSearch:any;
   searchInput:any;
   cityId:Number = 1;
 
+  constructor(private _RestaurantdeliveryapisService:RestaurantdeliveryapisService) { }
+
   /*================ Get Restaurant based on Selected City =============*/ 
   getCityId(event:any){
+    // City Id
     this.cityId = event.target.value;
+    // Get All Restaurants for Specific City
     this._RestaurantdeliveryapisService.getRestaurantsForSpecificCity(this.cityId).subscribe(
+    {
+      next:(response)=>{
+        this.Restaurants = response.data;
+      },
+      error:(error) =>{
+        console.log(error)
+      }
+    })
+  }
+
+  /*================ Search for Restaurant based on Selected City =============*/ 
+  Search(){
+    if(this.searchInput.length >= 1){
+      this._RestaurantdeliveryapisService.searchForRestaurantinSpecificCity(this.cityId , this.searchInput).subscribe(
       {
         next:(response)=>{
-          this.Restaurants = response.data;
+          this.RestaurantsSearch = response.data;
         },
         error:(error) =>{
           console.log(error)
         }
-      }
-    )
-  }
-  /*================ Search for Restaurant based on Selected City =============*/ 
-  Search(){
-    if(this.searchInput.length >= 1){
-    this._RestaurantdeliveryapisService.searchForRestaurantinSpecificCity(this.cityId , this.searchInput).subscribe(
-    {
-      next:(response)=>{
-      this.RestaurantsSearch = response.data;
-    },
-    error:(error) =>{
-      console.log(error)
-    }
-    })
+      })
     }
   }
   ngOnInit(): void {
-      /*=============== Get All Cities ===============*/ 
-      this._RestaurantdeliveryapisService.getAllCities().subscribe(
-      {
-        next:(response)=>{
+    /*=============== Get All Cities ===============*/ 
+    this._RestaurantdeliveryapisService.getAllCities().subscribe(
+    {
+      next:(response)=>{
         this.options = response
       },
       error:(error) =>{
         console.log(error)
       }
-      })
+    })
 
-      /*================ Get Restaurant in City His id = 1 To be defult=============*/ 
-      this._RestaurantdeliveryapisService.getRestaurantsForSpecificCity(1).subscribe(
-        {
-          next:(response)=>{
-            this.Restaurants = response.data;
-          },
-          error:(error) =>{
-            console.log(error)
-          }
-        }
-      )
+    /*================ Get Restaurant in City His id = 1 To be defult=============*/ 
+    this._RestaurantdeliveryapisService.getRestaurantsForSpecificCity(1).subscribe(
+    {
+      next:(response)=>{
+        this.Restaurants = response.data;
+      },
+      error:(error) =>{
+        console.log(error)
+      }
+    })
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantdeliveryapisService } from '../services/restaurantdeliveryapis.service';
-import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-menu',
@@ -13,33 +12,20 @@ export class MenuComponent implements OnInit {
 
   constructor(private _RestaurantdeliveryapisService:RestaurantdeliveryapisService , private _ActivatedRoute:ActivatedRoute) { }
 
+  /*=========================Main Variables==========================*/
   restaurantId:number = this._ActivatedRoute.snapshot.params['id'];
   menuItems:any;
-  // selected:Array<Number> = [];
   basketBody:any;
-  // uuidValue:any;
   buttonStatus:any;
   basketIds:Array<any> = [];
-
-  // generateUUID(){
-  //   this.uuidValue=UUID.UUID();
-  //   return this.uuidValue;
-  // }
+  pageNumber:number = 1;
   
   onChange(event:any , name:any, price:any, pictureUrl:any){
-    // this.generateUUID();
-    // console.log(event.target.checked)
-   
+    
     if(event.target.checked){
-      // this.selected.push(event.target.value);
+      // basketIDs
       this.basketIds.push(`basket${event.target.value}`);
-
-      // console.log(this.selected);
-      console.log(this.basketIds);
-
-      // localStorage.setItem(`${event.target.value}` , this.uuidValue)
-      
-
+      // baskest body to send to api
       this.basketBody = {
         "id": `basket${event.target.value}`,
         "items": [
@@ -52,53 +38,62 @@ export class MenuComponent implements OnInit {
           }
         ]
       }
-      /**===============================Add item to basket================================== */
-      this._RestaurantdeliveryapisService.addbasket(this.basketBody).subscribe(
-        {
-          next:(response)=>{
-          console.log(response)
+      /**===============================Add item to basket================================ */
+      this._RestaurantdeliveryapisService.addOrUpdatebasket(this.basketBody).subscribe(
+      {
+        next:()=>{
           this.buttonStatus = true;
         },
         error:(error) =>{
           console.log(error)
         }
-        })  
+      })  
     }
     else{
-      // this.selected.splice(this.selected.indexOf(event.target.value),1)
+      //remove basketId form BasketIDs Array
       this.basketIds.splice(this.basketIds.indexOf(`basket${event.target.value}`),1)
+
       /**===============================delete item to basket================================== */
-      this._RestaurantdeliveryapisService.deletebasket(localStorage.getItem(`${event.target.value}`)).subscribe(
-        {
-          next:(response)=>{
-          console.log(response)
-          localStorage.removeItem(`${event.target.value}`)
-          this.buttonStatus = false;
+      this._RestaurantdeliveryapisService.deletebasket(`basket${event.target.value}`).subscribe(
+      {
+        next:()=>{
+          if(!this.basketIds?.length){
+            this.buttonStatus = false;
+          }
         },
         error:(error) =>{
           console.log(error)
         }
-        }) 
-      // console.log(this.selected)
-      console.log(this.basketIds)
+      }) 
     }
+
+    // Store basketIDs in LocalStorage to use it in onthor component
     localStorage.setItem("BasketIds" , JSON.stringify(this.basketIds))
-    // this._RestaurantdeliveryapisService.saveIds(this.selected);
-    // let check = this._RestaurantdeliveryapisService.retrieveIDs();
-    // console.log(check)
-    
   }
 
-  ngOnInit(): void {
-    this._RestaurantdeliveryapisService.getMenuForSpecificRestaurant(this.restaurantId).subscribe(
-      {
-        next:(response)=>{
-        console.log(response)
+  // pagination
+  Page(event:any){
+    this._RestaurantdeliveryapisService.getMenuForSpecificRestaurant(this.restaurantId , event.target.value).subscribe(
+    {
+      next:(response)=>{
         this.menuItems = response.data
       },
       error:(error) =>{
         console.log(error)
       }
-      })
+    })
+  }
+
+  ngOnInit(): void {
+    //get menu for specific resturant
+    this._RestaurantdeliveryapisService.getMenuForSpecificRestaurant(this.restaurantId , this.pageNumber).subscribe(
+    {
+      next:(response)=>{
+        this.menuItems = response.data
+      },
+      error:(error) =>{
+        console.log(error)
+      }
+    })
   }
 }

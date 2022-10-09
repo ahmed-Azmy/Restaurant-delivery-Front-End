@@ -2,98 +2,117 @@
     <div class="Loading py-5">
         <div class="container">
            <div class="Heading text-center pt-5">
-              <h1 class="text-white">Order <span class="HeadingItalic">Food Online From</span> the <br> Best Restaurants</h1>
+                <h1 class="text-white">Order <span class="HeadingItalic">Food Online From</span> the <br> Best Restaurants</h1>
            </div>
            <div class="Search p-4 my-5">
-            <div class="row gy-2">
-                <div class="col-md-5">
-                   <input class="form-control form-control-lg rounded-0" [(ngModel)]="searchInput" (keyup)="Search()" type="text" placeholder="Search For Restaurant" aria-label=".form-control-lg example">
+                <div class="row gy-2">
+                    <div class="col-md-5">
+                        <input class="form-control form-control-lg rounded-0" [(ngModel)]="searchInput" (keyup)="Search()" type="text" placeholder="Search For Restaurant" aria-label=".form-control-lg example">
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select form-select-lg rounded-0" (change)="getCityId($event)" aria-label=".form-select-lg example">
+                            <option *ngFor="let option of options" value="{{option.id}}">
+                                {{option.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger btn-lg w-100 rounded-0">SEARCH</button>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                   <select class="form-select form-select-lg rounded-0" (change)="getCityId($event)" aria-label=".form-select-lg example">
-                      <option *ngFor="let option of options" value="{{option.id}}">
-                        {{option.name}}
-                      </option>
-                   </select>
-                </div>
-                <div class="col-md-3">
-                   <button class="btn btn-primary btn-lg w-100 rounded-0">SEARCH</button>
-                </div>
-            </div>
            </div>
            <div class="Counters row text-white pb-3">
-            <div class="col-6 col-md-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
-                        <img src="../../assets/images/C1.png">
-                    </div>
-                    <div class="Info">
-                        <h3 class="m-0 fw-bold">377</h3>
-                        <p class="m-0 text-black-50 fw-bold">Restaurant</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
-                        <img src="../../assets/images/C2.png">
-                    </div>
-                    <div class="Info">
-                        <h3 class="m-0 fw-bold">158</h3>
-                        <p class="m-0 text-black-50 fw-bold">People Served</p>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row text-center text-md-start my-1">
+                        <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
+                            <img src="../../assets/images/C1.png" alt="">
+                        </div>
+                        <div class="Info">
+                            <h3 class="m-0 fw-bold">377</h3>
+                            <p class="m-0 text-black-50 fw-bold">Restaurant</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
-                        <img src="../../assets/images/C3.png">
-                    </div>
-                    <div class="Info">
-                        <h3 class="m-0 fw-bold">659K</h3>
-                        <p class="m-0 text-black-50 fw-bold">Happy Service</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="d-flex align-items-center justify-content-center">
-                    <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
-                        <img src="../../assets/images/C4.png">
-                    </div>
-                    <div class="Info">
-                        <h3 class="m-0 fw-bold">235</h3>
-                        <p class="m-0 text-black-50 fw-bold">Regular Users</p>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row text-center text-md-start my-1">
+                        <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
+                            <img src="../../assets/images/C2.png" alt="">
+                        </div>
+                        <div class="Info">
+                            <h3 class="m-0 fw-bold">158</h3>
+                            <p class="m-0 text-black-50 fw-bold">People Served</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row text-center text-md-start my-1">
+                        <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
+                            <img src="../../assets/images/C3.png" alt="">
+                        </div>
+                        <div class="Info">
+                            <h3 class="m-0 fw-bold">659K</h3>
+                            <p class="m-0 text-black-50 fw-bold">Happy Service</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="d-flex align-items-center justify-content-center flex-column flex-md-row text-center text-md-start my-1">
+                        <div class="Image rounded-circle bg-white d-flex justify-content-center align-items-center me-2">
+                            <img src="../../assets/images/C4.png" alt="">
+                        </div>
+                        <div class="Info">
+                            <h3 class="m-0 fw-bold">235</h3>
+                            <p class="m-0 text-black-50 fw-bold">Regular Users</p>
+                        </div>
+                    </div>
+                </div>
            </div>
         </div>
     </div>
     <div class="RestaurantInfo">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4 mb-5" *ngIf="!searchInput">
-                <div class="col " *ngFor="let Restaurant of Restaurants">
-                  <div class="card h-100 rounded-0">
-                    <img [src]="Restaurant.pictureUrl" class="card-img-top h-100 rounded-0" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{Restaurant.name}}</h5>
-                      <p class="card-text">{{Restaurant.description}}</p>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4 mb-5" *ngIf="!searchInput">
+                <div class="col" *ngFor="let Restaurant of Restaurants">
+                    <div class="card h-100 rounded-bottom shadow">
+                        <img [src]="Restaurant.pictureUrl" class="card-img-top h-100 rounded-0" alt="...">
+                        <div class="card-body">
+                            <div class="layer bg-warning text-center py-2">
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+                                <span class="vr mx-2"></span>
+                                <span>
+                                    <i class="fa-regular fa-comments"></i>
+                                    06
+                                </span>
+                                <span class="vr mx-2"></span>
+                                <span>
+                                    <i class="fa-solid fa-heart"></i>
+                                    157
+                                </span>
+                            </div>
+                            <h5 class="card-title">{{Restaurant.name}}</h5>
+                            <p class="card-text">{{Restaurant.description}}</p>
+                        </div>
+                        <a class="fw-bold ps-3 pb-2 text-body" [routerLink]="['/menu' , Restaurant.id]">MENU <i class="fa-solid fa-angles-right"></i></a>
                     </div>
-                    <a class="fw-bold ps-3 pb-2" [routerLink]="['/menu' , Restaurant.id]">MENU >></a>
-                  </div>
                 </div>
-              </div>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4 mb-5" *ngIf="searchInput">
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mt-4 mb-5" *ngIf="searchInput">
                 <div class="col " *ngFor="let Restaurant of RestaurantsSearch">
-                  <div class="card h-100 rounded-0">
-                    <img [src]="Restaurant.pictureUrl" class="card-img-top h-100 rounded-0" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{Restaurant.name}}</h5>
-                      <p class="card-text">{{Restaurant.description}}</p>
+                    <div class="card h-100 rounded-0">
+                        <img [src]="Restaurant.pictureUrl" class="card-img-top h-100 rounded-0" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{Restaurant.name}}</h5>
+                            <p class="card-text">{{Restaurant.description}}</p>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
         </div> 
     </div>
 </div>
